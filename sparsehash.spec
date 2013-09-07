@@ -12,6 +12,7 @@ Source0:	http://sparsehash.googlecode.com/files/%{name}-%{version}.tar.gz
 # Source0-md5:	077b7d874d924f6f85e88d527ef42a42
 URL:		http://code.google.com/p/sparsehash
 %{?with_tests:BuildRequires:	libstdc++-devel}
+BuildRequires:	pkgconfig
 BuildRequires:	sed >= 4.0
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
