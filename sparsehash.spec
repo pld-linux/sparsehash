@@ -20,6 +20,12 @@ BuildRequires:	sed >= 4.0
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%if %{_host_cpu} == "x32"
+%define build_arch %{_target_platform}
+%else
+%define build_arch %{_host}
+%endif
+
 %description
 The Google SparseHash project contains several C++ template hash-map
 implementations with different performance characteristics, including
@@ -56,8 +62,8 @@ zoptymalizowaną pod kątem szybkości.
 
 %build
 %configure \
-	--host=%{_host} \
-	--build=%{_host}
+	--host=%{build_arch} \
+	--build=%{build_arch}
 
 # clearing noinst_PROGRAMS helps not to build targets for tests
 %{__make} \
