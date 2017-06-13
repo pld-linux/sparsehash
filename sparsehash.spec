@@ -2,15 +2,17 @@
 # Conditional build:
 %bcond_without	tests		# build without tests
 
-Summary:	Extremely memory-efficient C++ hash_map implementation
+Summary:	C++ associative containers
+Summary(pl.UTF-8):	Kontenery asocjacyjne dla C++
 Name:		sparsehash
-Version:	2.0.2
+Version:	2.0.3
 Release:	1
 License:	BSD
 Group:		Development/Libraries
-Source0:	http://sparsehash.googlecode.com/files/%{name}-%{version}.tar.gz
-# Source0-md5:	1db92ed7f257d9b5f14a309d75e8a1d4
-URL:		http://code.google.com/p/sparsehash
+#Source0Download: https://github.com/sparsehash/sparsehash/releases
+Source0:	https://github.com/sparsehash/sparsehash/archive/%{name}-%{version}.tar.gz
+# Source0-md5:	d8d5e2538c1c25577b3f066d7a55e99e
+URL:		https://github.com/sparsehash/sparsehash
 %{?with_tests:BuildRequires:	libstdc++-devel}
 %{?with_tests:BuildRequires:	libtcmalloc-devel}
 BuildRequires:	pkgconfig
@@ -24,9 +26,16 @@ implementations with different performance characteristics, including
 an implementation that optimizes for space and one that optimizes for
 speed.
 
+%description -l pl.UTF-8
+Projekt Google SparseHash zawiera kilka implementacji struktury
+hash-map w szablonach C++ z różną charakterystyką wydajności, w tym
+implementację zoptymalizowaną pod kątem miejsca oraz drugą,
+zoptymalizowaną pod kątem szybkości.
+
 # all files are in -devel package
 %package devel
-Summary:	Extremely memory-efficient C++ hash_map implementation
+Summary:	C++ associative containers
+Summary(pl.UTF-8):	Kontenery asocjacyjne dla C++
 Group:		Development/Libraries
 Requires:	libstdc++-devel
 
@@ -36,8 +45,14 @@ implementations with different performance characteristics, including
 an implementation that optimizes for space and one that optimizes for
 speed.
 
+%description devel -l pl.UTF-8
+Projekt Google SparseHash zawiera kilka implementacji struktury
+hash-map w szablonach C++ z różną charakterystyką wydajności, w tym
+implementację zoptymalizowaną pod kątem miejsca oraz drugą,
+zoptymalizowaną pod kątem szybkości.
+
 %prep
-%setup -q
+%setup -q -n %{name}-%{name}-%{version}
 
 %build
 %configure \
@@ -58,13 +73,12 @@ rm -rf $RPM_BUILD_ROOT
 	noinst_PROGRAMS= \
 	DESTDIR=$RPM_BUILD_ROOT
 
-# Remove unneeded files
-rm $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/INSTALL
-rm $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/README_windows.txt
+# packaged as %doc
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/%{name}-2.0.2
 
 # make noarch
 install -d $RPM_BUILD_ROOT%{_npkgconfigdir}
-mv $RPM_BUILD_ROOT{%{_pkgconfigdir},%{_npkgconfigdir}}/libsparsehash.pc
+%{__mv} $RPM_BUILD_ROOT{%{_pkgconfigdir},%{_npkgconfigdir}}/libsparsehash.pc
 %{__sed} -i -e '/libdir/d' $RPM_BUILD_ROOT%{_npkgconfigdir}/libsparsehash.pc
 
 %clean
@@ -72,7 +86,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc %{_docdir}/sparsehash-%{version}
+%doc AUTHORS COPYING ChangeLog NEWS README TODO doc/*
 %{_includedir}/sparsehash
 %{_npkgconfigdir}/libsparsehash.pc
 
