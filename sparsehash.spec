@@ -62,6 +62,7 @@ zoptymalizowaną pod kątem szybkości.
 
 %build
 %configure \
+	ac_cv_header_google_malloc_extension_h=no \
 	--host=%{build_arch} \
 	--build=%{build_arch}
 
