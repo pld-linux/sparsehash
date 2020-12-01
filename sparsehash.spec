@@ -5,13 +5,13 @@
 Summary:	C++ associative containers
 Summary(pl.UTF-8):	Kontenery asocjacyjne dla C++
 Name:		sparsehash
-Version:	2.0.3
+Version:	2.0.4
 Release:	1
 License:	BSD
 Group:		Development/Libraries
 #Source0Download: https://github.com/sparsehash/sparsehash/releases
 Source0:	https://github.com/sparsehash/sparsehash/archive/%{name}-%{version}.tar.gz
-# Source0-md5:	d8d5e2538c1c25577b3f066d7a55e99e
+# Source0-md5:	cb565465643c3588abfac569b31e7433
 URL:		https://github.com/sparsehash/sparsehash
 %{?with_tests:BuildRequires:	libstdc++-devel}
 %{?with_tests:BuildRequires:	libtcmalloc-devel}
