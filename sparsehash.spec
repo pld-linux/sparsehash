@@ -6,7 +6,7 @@ Summary:	C++ associative containers
 Summary(pl.UTF-8):	Kontenery asocjacyjne dla C++
 Name:		sparsehash
 Version:	2.0.4
-Release:	1
+Release:	2
 License:	BSD
 Group:		Development/Libraries
 #Source0Download: https://github.com/sparsehash/sparsehash/releases
@@ -20,7 +20,7 @@ BuildRequires:	sed >= 4.0
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%if %{_host_cpu} == "x32"
+%ifarch x32
 %define build_arch %{_target_platform}
 %else
 %define build_arch %{_host}
